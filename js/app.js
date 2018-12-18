@@ -12,12 +12,12 @@
     render() {
       console.log('rendering');
 
-      let app = document.getElementById('app');
+      let main = document.getElementById('main');
 
       //add wrapper
       let wrapper = document.createElement("div");
       wrapper.id = this.name;
-      app.appendChild(wrapper);
+      main.appendChild(wrapper);
 
       //add cat name
       let title = document.createElement("h1");
@@ -48,10 +48,49 @@
     }
   }
 
-  const cat1 = new Cat('Larry', 'img/kitten.jpg');
-  cat1.render();
+  const cats = [
+    ['Larry', 'img/kitten.jpg'],
+    ['Bob', 'img/cat.jpg'],
+    ['Mike', 'img/kittens.jpg'],
+    ['Steve', 'img/cat.jpg'],
+    ['Edgar', 'img/kitten.jpg']
+  ];
 
-  const cat2 = new Cat('Bob', 'img/cat.jpg');
-  cat2.render();
+  const catList = [];
+
+  function init() {
+
+    //initiate cat objects
+    for (let i = 0, len = cats.length; i < len; i++) {
+      catList[i] = new Cat(cats[i][0], cats[i][1]);
+    }
+
+    //create menu
+    let menu = document.getElementById('menu');
+    let menuUL = document.createElement("ul");
+    menu.appendChild(menuUL);
+
+    for (let x = 0, len = catList.length; x < len; x++) {
+      let menuLI = document.createElement("li");
+      let elemTitle = document.createTextNode(catList[x].name);
+      menuLI.appendChild(elemTitle);
+      menuUL.appendChild(menuLI);
+
+      menuLI.addEventListener('click', menuSelect.bind(catList[x]));
+    }
+
+  }
+
+  function menuSelect() {
+
+    let main = document.getElementById('main');
+    if (main.firstChild != null) {
+      main.removeChild(main.firstChild);
+    }
+    this.render();
+
+  }
+
+  init();
 
 }());

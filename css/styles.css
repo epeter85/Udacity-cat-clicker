@@ -1,0 +1,21 @@
+#app{
+  display:flex;
+}
+
+#menu{
+  width:25%;
+}
+
+#menu ul {
+  list-style-type: none;
+  color: #777;
+}
+
+#menu li {
+  font-size: 1.5em;
+  padding-bottom: 15px;
+}
+
+#main{
+  width:75%;
+}
